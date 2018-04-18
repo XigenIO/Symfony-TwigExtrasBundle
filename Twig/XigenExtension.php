@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Xigen\Bundle\TwigBundle\Twig;
+namespace Xigen\Bundle\TwigExtrasBundle\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

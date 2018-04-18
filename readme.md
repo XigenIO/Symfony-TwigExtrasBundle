@@ -9,9 +9,9 @@ You can install this bundle via composer. You will need to manually add the repo
 {
 
 "repositories": {
-    "bundle-TwigBundle": {
+    "bundle-TwigExtrasBundle": {
         "type": "vcs",
-        "url": "https://git.xigen.co.uk/Symfony-Bundles/TwigBundle.git"
+        "url": "https://git.xigen.co.uk/Symfony-Bundles/TwigExtrasBundle.git"
     }
 }
 
@@ -24,10 +24,13 @@ and then require the bundle as normal.
 composer require xigen/twig
 ```
 
-Finally register the bundle in `app/AppKernel.php`:
+Register the bundle in `app/AppKernel.php`:
+(This is done for you automatically in Symfony 4)
 ```php
 $bundles = [
     [...]
-    new Xigen\Bundle\TwigBundle\TwigBundle(),
+    new Xigen\Bundle\TwigExtrasBundle\TwigExtrasBundle(),
 ];
 ```
+
+Finaly register the twig extension in `config/packages/twig_extensions.yaml`:

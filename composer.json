@@ -1,0 +1,19 @@
+{
+    "name" : "xigen/twig",
+    "description" : "",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Chris Hilsdon",
+        "email" : "chrish@xigen.co.uk",
+        "homepage": "https://xigen.co.uk"
+    }],
+    "require" : {
+        "php": "^7.2",
+        "twig/extensions": "^1.5"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Xigen\\Bundle\\TwigBundle\\" : ""
+        }
+    }
+}

@@ -30,6 +30,7 @@ class XigenExtension extends AbstractExtension
     {
         return[
             new TwigFunction('isCurrentRoute', [$this, 'isCurrentRoute']),
+            new TwigFunction('bytesToHumanReadable', [$this, 'bytesToHumanReadable']),
         ];
     }
 
@@ -50,5 +51,20 @@ class XigenExtension extends AbstractExtension
         }
 
         return '';
+    }
+
+    /**
+     * Format file size to a human readable format
+     * @link http://jeffreysambells.com/2012/10/25/human-readable-filesize-php
+     * @param  integer $bytes
+     * @return string
+     */
+    public function bytesToHumanReadable($bytes)
+    {
+        $bytes = (string) $bytes;
+        $size = ['B','kB','MB','GB','TB','PB'];
+        $factor = floor((strlen($bytes) - 1) / 3);
+
+        return sprintf("%.2f", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
 }

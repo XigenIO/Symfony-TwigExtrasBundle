@@ -1,6 +1,6 @@
 {
-    "name" : "xigen/twig-extras",
-    "description" : "",
+    "name" : "xigen.io/twig-extras-bundle",
+    "description" : "A collection of missing Twig filters and functions",
     "type" : "symfony-bundle",
     "authors" : [{
         "name" : "Chris Hilsdon",

@@ -36,7 +36,7 @@ class XigenExtension extends AbstractExtension
 
     /**
      * Check if the current request matches a defined route. Useful for adding the 'active' class to links
-     * @param  string $route Route to match. Can be a prefix (eg: users_)
+     * @param  string|array $route Route to match. Can be a prefix (eg: users_)
      * @param  string $class The string to return if the route matches
      * @return string Return the given class name if the route matches
      */
@@ -44,10 +44,18 @@ class XigenExtension extends AbstractExtension
     {
         // Get the current request
         $request = $this->requestStack->getCurrentRequest();
+        $currentRoute = $request->get('_route');
 
-        // Use strpos so that you can also use a route prefix
-        if (false !== strpos($request->get('_route'), $route)) {
-            return $class;
+        // If there is only one route passed as a string, convert it to an array
+        if (!is_array($route)) {
+            $route = [$route];
+        }
+
+        foreach ($route as $test) {
+            // Use strpos so that you can also use a route prefix
+            if (false !== strpos($currentRoute, $test)) {
+                return $calss;
+            }
         }
 
         return '';

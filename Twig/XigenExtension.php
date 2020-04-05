@@ -54,7 +54,7 @@ class XigenExtension extends AbstractExtension
         foreach ($route as $test) {
             // Use strpos so that you can also use a route prefix
             if (false !== strpos($currentRoute, $test)) {
-                return $calss;
+                return $class;
             }
         }
 

@@ -7,6 +7,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class XigenExtension extends AbstractExtension
 {
@@ -16,11 +17,18 @@ class XigenExtension extends AbstractExtension
     private $requestStack;
 
     /**
+     * Full path to public directory
+     * @var string
+     */
+    protected $publicPath;
+
+    /**
      * {@inheritdoc}
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, KernelInterface $kernel)
     {
         $this->requestStack = $requestStack;
+        $this->publicPath = $kernel->getProjectDir() . '/public/';
     }
 
     /**
@@ -31,6 +39,7 @@ class XigenExtension extends AbstractExtension
         return[
             new TwigFunction('isCurrentRoute', [$this, 'isCurrentRoute']),
             new TwigFunction('bytesToHumanReadable', [$this, 'bytesToHumanReadable']),
+            new TwigFunction('base64Image', [$this, 'base64Image']),
         ];
     }
 
@@ -74,5 +83,14 @@ class XigenExtension extends AbstractExtension
         $factor = floor((strlen($bytes) - 1) / 3);
 
         return sprintf("%.2f", $bytes / pow(1024, $factor)) . @$size[$factor];
+    }
+
+    public function base64Image($asset)
+    {
+        $asset = $this->publicPath . $asset;
+        $type = pathinfo($asset, PATHINFO_EXTENSION);
+        $data = file_get_contents($asset);
+
+        return 'data:image/' . $type . ';base64,' . base64_encode($data);
     }
 }

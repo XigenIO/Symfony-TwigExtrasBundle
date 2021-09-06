@@ -55,6 +55,11 @@ class XigenExtension extends AbstractExtension
         $request = $this->requestStack->getCurrentRequest();
         $currentRoute = $request->get('_route');
 
+        // Check if current rotue is available
+        if (null === $currentRoute) {
+            return '';
+        }
+
         // If there is only one route passed as a string, convert it to an array
         if (!is_array($route)) {
             $route = [$route];

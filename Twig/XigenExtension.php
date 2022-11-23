@@ -51,6 +51,10 @@ class XigenExtension extends AbstractExtension
      */
     public function isCurrentRoute($route, $class = 'active')
     {
+	if (null === $route) {
+            return '';
+	}
+
         // Get the current request
         $request = $this->requestStack->getCurrentRequest();
         $currentRoute = $request->get('_route');
